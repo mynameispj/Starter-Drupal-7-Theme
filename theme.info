@@ -19,9 +19,10 @@ regions[help] = Help
 regions[page_top] = Page Top
 regions[page_bottom] = Page Bottom
 
-stylesheets[screen][] = css/style.css
+stylesheets[screen][] = styles/stylesheets/screen.css
 
-scripts[] = js/modernizr-1.7.min.js
+scripts[] = js/vendor/modernizr-2.6.2.min.js
+scripts[] = js/main.js
 
 ; Information added by drupal.org packaging script on 2011-01-05
 version = "7.0"

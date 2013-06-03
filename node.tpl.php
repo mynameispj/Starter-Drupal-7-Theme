@@ -78,16 +78,14 @@
  * @see template_process()
  */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<?php if ($page): ?>
+
+<article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 	
 	<?php print render($title_prefix); ?>
-	<?php if (!$page): ?>
-		<h2<?php print $title_attributes; ?>>
-			<a href="<?php print $node_url; ?>">
-				<?php print $title; ?>
-			</a>
-		</h2>
-	<?php endif; ?>
+	<h1<?php print $title_attributes; ?>>
+		<?php print $title; ?>
+	</h1>
 	<?php print render($title_suffix); ?>
 		
 	<div class="content"<?php print $content_attributes; ?>>
@@ -95,6 +93,8 @@
 		// We hide the comments and links now so that we can render them later.
 			hide($content['comments']);
 			hide($content['links']);
+			hide($content['body']);
+			//krumo($node); 
 			print render($content);
 			
 		//example of how to use field_get_items() to print just the body field without Drupal cruft markup
@@ -105,4 +105,22 @@
 		?>
 	</div>
 	
-</div>
+</article>
+
+<?php elseif ($teaser): ?>
+
+	<?php print render($title_prefix); ?>
+	<h1<?php print $title_attributes; ?>>
+		<a href="<?php print $node_url; ?>">
+			<?php print $title; ?>
+		</a>
+	</h1>
+
+	<?php print render($title_suffix); ?>
+  
+  <?php 
+    //Theme your teaser content here 
+    print render($content); 
+  ?>
+
+<?php endif; ?> 

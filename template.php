@@ -1,5 +1,28 @@
 <?php
 
+function theme_menu_link(array $variables) {
+  //------------------------
+  // This function overrides the default menu behavior to add the menu item's 
+  // title slug ('page-name-slugized') and the depth of its menu to the link as classes. 
+  // Makes for easier theming.  
+  
+  $element = $variables['element'];
+  
+  $sub_menu = '';
+  
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+    
+  $cleaned_url = strtolower(preg_replace('/[^a-zA-Z0-9_-]+/', '-', $element['#title']));
+  array_push($element['#attributes']['class'], $cleaned_url); 
+  array_push($element['#attributes']['class'], 'level-' . $element['#original_link']['depth']); 
+
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+
 function theme_links($variables) {
   $links = $variables['links'];
   $attributes = $variables['attributes'];

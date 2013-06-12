@@ -104,10 +104,11 @@ function theme_links($variables) {
 
 function theme_preprocess_page(&$variables, $hook) {
 
-    // When this goes through the theme.inc some where it changes _ to - so the tpl name is actually page--type-typename.tpl
-    if (isset($variables['node'])) {
-        $variables['theme_hook_suggestions'][] = 'page__type__'. str_replace('_', '--', $variables['node']->type); 
-        
-    } 
+    // When this goes through the theme.inc some where it changes _ to - so the tpl name is actually page--type-name.tpl
+
+  if (isset($variables['node'])) {
+     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+  }
+       
        
 }

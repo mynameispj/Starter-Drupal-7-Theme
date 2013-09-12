@@ -105,9 +105,14 @@ function theme_links($variables) {
 function theme_preprocess_page(&$variables, $hook) {
 
     // When this goes through the theme.inc some where it changes _ to - so the tpl name is actually page--type-name.tpl
-
   if (isset($variables['node'])) {
      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+  }
+
+  //This gives you access to the node's fields within a page.tpl.php file 
+  //Simply call $node_content['field_name'] in a page.tpl.php
+  if (arg(0) == 'node') {
+    $variables['node_content'] =& $variables['page']['content']['system_main']['nodes'][arg(1)];
   }
        
        

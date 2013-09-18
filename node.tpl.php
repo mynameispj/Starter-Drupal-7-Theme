@@ -90,19 +90,20 @@
 		
 	<div class="content"<?php print $content_attributes; ?>>
 		<?php
-		// We hide the comments and links now so that we can render them later.
+		  // We hide the comments and links now so that we can render them later.
 			hide($content['comments']);
 			hide($content['links']);
 			hide($content['body']);
 			//krumo($node); 
 			print render($content);
 			
-		//example of how to use field_get_items() to print just the body field without Drupal cruft markup
-		//krumo() these values for more info
-		//also see field_view_field() and field_view_value() 
-			$bodyField = field_get_items('node',$node,'body'); 
-			print $bodyField[0]['safe_value']; 	
-		?>
+  		//example of how to use field_get_items() to print just the body field without Drupal cruft markup
+  		//krumo() these values for more info
+  		//also see field_view_field() and field_view_value() 
+      $bodyField = field_get_items('node',$node,'body'); 
+      $bodyOutput = field_view_value('node', $node, 'body', $bodyField[0]);
+      print render($bodyOutput); 		
+    ?>
 	</div>
 	
 </article>
